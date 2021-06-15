@@ -8,19 +8,16 @@ import {
   } from 'typeorm';
   
   @Entity()
-  export class MyPost extends BaseEntity {
+  export class MyComment extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
-    
-    @Column({default : 7})
-    userId: number;
 
     @Column()
+    postId: number;
+  
+    @Column()
     content: string;
-  
-    @Column({default : 'no image'})
-    image: string;
-  
+    
     @UpdateDateColumn()
     update: Date;
   }

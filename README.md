@@ -71,3 +71,20 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+nest g module auth —no-spec
+nest g co auth —no-spec
+nest g s auth —no-spec
+
+yarn add bcrypt
+yarn add @nestjs/jwt @nestjs/passport passport passport-jwt
+
+yarn add class-transformer class-validator
+yard add change-case
+nest g pi changeStringCase —no-spec
+
+yarn add rxjs typeorm pg
+yarn add @nestjs/typeorm
+
+yarn add multer fs-extra

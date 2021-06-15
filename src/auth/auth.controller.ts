@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { UserCredentialDto } from './dto/user-credential.dto';
@@ -7,6 +7,11 @@ import { GetUsername } from './get-username.decorator';
 @Controller('auth')
 export class AuthController {
   constructor(private authenService: AuthService) {}
+
+  @Get('/:id')
+  getUserById(@Param('id') id : number){
+    return this.authenService.getUserById(id)
+  }
 
   @Post('/signup')
   @UsePipes(ValidationPipe)

@@ -13,5 +13,7 @@ export class UserCredentialDto {
     // @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,{message: 'password too weak'})
     password: string;
 
+    name: string;
+
   }
   

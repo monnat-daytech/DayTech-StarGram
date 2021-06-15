@@ -1,9 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateMyPostDto{
+export class CreateMyCommentDto{
 
-    userId: number;
+    postId: number;
 
     content: string;
-    
 }

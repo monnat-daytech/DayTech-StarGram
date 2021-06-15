@@ -1,5 +1,5 @@
 import { Body, Controller,Post,  UseInterceptors,
-    UploadedFile, Param ,Get , Put , Delete} from '@nestjs/common';
+    UploadedFile, Param ,Get , Put , Delete, Patch} from '@nestjs/common';
 import { CreateMyPostDto } from './dto/create-mypost-dto';
 import { MypostService } from './mypost.service';
 import { diskStorage } from 'multer';
@@ -50,7 +50,7 @@ export class MypostController {
         return myPost;
     }
 
-    @Put('/:id')
+    @Patch('/:id')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({

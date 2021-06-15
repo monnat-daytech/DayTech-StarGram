@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserCredentialDto } from './dto/user-credential.dto';
@@ -34,5 +34,14 @@ export class AuthService {
         const payload = {username:username}
         const token = await this.jwtService.sign(payload)
         return {token}
+    }
+
+    async getUserById(id : number){
+        const data = await this.userRepository.findOne(id);
+        if (!data) {
+          throw new NotFoundException(`Product ${id} not found`);
+        }
+    
+        return data;
     }
 }
