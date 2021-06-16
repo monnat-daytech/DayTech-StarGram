@@ -11,7 +11,6 @@ export class AuthController {
   @Get('/user/:id')
   getUserById(@Param('id') id : number){
   console.log("🚀 ~ file: auth.controller.ts ~ line 13 ~ AuthController ~ getUserById ~ id", id)
-    
     return this.authenService.getUserById(id)
   }
 
@@ -21,11 +20,11 @@ export class AuthController {
     return req.user.username
   }
 
-  // @Get('post/:id')
-  // getUserPosts(@Param('id') id : number  ){
-  //   return this.authenService.getUserPosts(id)
+  @Get('post/:id')
+  getUserPosts(@Param('id') id : number  ){
+    return this.authenService.getUserPosts(id)
 
-  // }
+  }
 
   @Post('/signup')
   @UsePipes(ValidationPipe)

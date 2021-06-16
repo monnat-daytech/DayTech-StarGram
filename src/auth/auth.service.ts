@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 // import { MyPostRepository } from 'src/mypost/dto/mypost.repository';
 import { UserCredentialDto } from './dto/user-credential.dto';
+import { User } from './dto/user.entity';
 import { UserRepository } from './dto/user.repository';
 
 @Injectable()
@@ -45,10 +46,11 @@ export class AuthService {
         return data;
     }
 
-    // async getUserPosts(id : number){
-    //     // const data = await this.userRepository.find()
-    //     const data = await this.myPostReposiory.find(id)
-    //     console.log("🚀 ~ file: auth.service.ts ~ line 50 ~ AuthService ~ getUserPosts ~ data", data)
-        
-    //  }
+    async getUserPosts(id : number){
+            const data = await this.userRepository.find({where : {id}})  
+            console.log("🚀 ~ file: auth.service.ts ~ line 50 ~ AuthService ~ getUserPosts ~ data", data)
+            console.log(data[0].posts)
+            return data
+
+     }
 }

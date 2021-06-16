@@ -1,7 +1,9 @@
+import { User } from 'src/auth/dto/user.entity';
 import {
     BaseEntity,
     Column,
     Entity,
+    ManyToOne,
     PrimaryColumn,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -20,6 +22,9 @@ import {
   
     @Column({default : 'no image'})
     image: string;
+
+    @ManyToOne(type => User, user => user.posts, { eager: false })
+    user: User
   
     @UpdateDateColumn()
     update: Date;

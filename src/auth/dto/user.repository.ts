@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt'
 export class UserRepository extends Repository<User> {
   
   async createUser(userCredentialDto:UserCredentialDto){
-    const {username, password , name} = userCredentialDto
+    const {username, password , name } = userCredentialDto
     const salt = bcrypt.genSaltSync()
 
     const user = new User()
