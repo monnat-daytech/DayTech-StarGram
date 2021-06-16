@@ -2,16 +2,30 @@ import { Body, Controller, Get, Param, Post, Req, UseGuards, UsePipes, Validatio
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { UserCredentialDto } from './dto/user-credential.dto';
-import { GetUsername } from './get-username.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authenService: AuthService) {}
 
-  @Get('/:id')
+
+  @Get('/user/:id')
   getUserById(@Param('id') id : number){
+  console.log("🚀 ~ file: auth.controller.ts ~ line 13 ~ AuthController ~ getUserById ~ id", id)
+    
     return this.authenService.getUserById(id)
   }
+
+  @Get('/test')
+  @UseGuards(AuthGuard())
+  ddt(@Req() req){
+    return req.user.username
+  }
+
+  // @Get('post/:id')
+  // getUserPosts(@Param('id') id : number  ){
+  //   return this.authenService.getUserPosts(id)
+
+  // }
 
   @Post('/signup')
   @UsePipes(ValidationPipe)
@@ -31,12 +45,4 @@ export class AuthController {
     return this.authenService.signIn(userCredential)
   }
 
-  @Get('/test')
-  @UseGuards(AuthGuard())
-  test(@Req() req , @GetUsername() username){
-    console.log("🚀 ~ file: auth.controller.ts ~ line 31 ~ AuthController ~ test ~ req", req)
-
-    //TODO: return req.user.username
-    return username
-  }
 }

@@ -16,37 +16,43 @@ export class MycommentService {
         return this.myCommentRepository.createMyComment(createMyCommentDto)
     }
 
-    getMyComments(keyword: number){
-        if(keyword){
-            const query = this.myCommentRepository.createQueryBuilder('mycomment');
-            query.andWhere('mycomment.postId LIKE :keyword', { keyword: `%${keyword}%`});
-            return query.getMany();
-        }else{
-            return this.myCommentRepository.find();
-        }
+    // getMyComments(keyword: number){
+    //     if(keyword){
+    //         const query = this.myCommentRepository.createQueryBuilder('mycomment');
+    //         query.andWhere('mycomment.postId LIKE :keyword', { keyword: `%${keyword}%`});
+    //         return query.getMany();
+    //     }else{
+    //         return this.myCommentRepository.find();
+    //     }
+    // }
+
+    async getMyCommentByPostId(postId: number){
+        return await this.myCommentRepository.find({where: {postId : postId}})
     }
 
     async deleteMyCommentById(id : number){
         return await this.myCommentRepository.delete(id);
     }
+    
 
-    // async getMyCommentById(id: number){
-    //     const data = await this.myCommentRepository.findOne(id);
-    //     if (!data) {
-    //         throw new NotFoundException(`Product ${id} not found`);
-    //       }
+    async getMyCommentById(id: number){
+        const data = await this.myCommentRepository.findOne(id);
+        if (!data) {
+            throw new NotFoundException(`Product ${id} not found`);
+          }
       
-    //       return data;
-    // }
+          return data;
+    }
 
     async upDateMyCommentById(id: number, createMyCommentDto: CreateMyCommentDto){
-        console.log("🚀 ~ file: mycomment.service.ts ~ line 46 ~ MycommentService ~ upDateMyCommentById ~ createMyCommentDto", createMyCommentDto)
+    console.log("🚀 ~ file: mycomment.service.ts ~ line 43 ~ MycommentService ~ upDateMyCommentById ~ createMyCommentDto", createMyCommentDto)
+     
         const myComment = await this.myCommentRepository.findOne(id);
+
         const {content} = createMyCommentDto
-        console.log("🚀 ~ file: mycomment.service.ts ~ line 49 ~ MycommentService ~ upDateMyCommentById ~ content", content)
         myComment.content = content
+
         await myComment.save();
-        console.log("🚀 ~ file: mycomment.service.ts ~ line 51 ~ MycommentService ~ upDateMyCommentById ~ myComment", myComment)
         return myComment;
     }
 

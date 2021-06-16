@@ -1,15 +1,16 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+// import { MyPostRepository } from 'src/mypost/dto/mypost.repository';
 import { UserCredentialDto } from './dto/user-credential.dto';
-import { User } from './dto/user.entity';
 import { UserRepository } from './dto/user.repository';
 
 @Injectable()
 export class AuthService {
-    constructor(@InjectRepository(UserRepository) 
+    constructor(@InjectRepository(UserRepository)
     private userRepository:UserRepository,
-    private jwtService:JwtService
+    private jwtService:JwtService,
+
     ){
 
     }
@@ -41,7 +42,13 @@ export class AuthService {
         if (!data) {
           throw new NotFoundException(`Product ${id} not found`);
         }
-    
         return data;
     }
+
+    // async getUserPosts(id : number){
+    //     // const data = await this.userRepository.find()
+    //     const data = await this.myPostReposiory.find(id)
+    //     console.log("🚀 ~ file: auth.service.ts ~ line 50 ~ AuthService ~ getUserPosts ~ data", data)
+        
+    //  }
 }

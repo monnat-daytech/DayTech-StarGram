@@ -1,15 +1,22 @@
 import { Body, Controller,Post,  UseInterceptors,
-    UploadedFile, Param ,Get , Put , Delete, Patch} from '@nestjs/common';
+    UploadedFile, Param ,Get , Put , Delete, Patch, UseGuards} from '@nestjs/common';
 import { CreateMyPostDto } from './dto/create-mypost-dto';
 import { MypostService } from './mypost.service';
 import { diskStorage } from 'multer';
 import * as fsExtra from 'fs-extra';
 import { extname } from 'path';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('mypost')
+@UseGuards(AuthGuard())
 export class MypostController {
     constructor(private myPostService: MypostService){}
+
+  @Get()
+  getMyPosts(){
+    return this.myPostService.getMyPosts()
+  } 
 
   @Get('/:id')
   getMyPostById(@Param('id') id: number) {

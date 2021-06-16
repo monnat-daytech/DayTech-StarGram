@@ -24,6 +24,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+  
 
   // @Column({ default: 'no image ja' })
   // salt: string;

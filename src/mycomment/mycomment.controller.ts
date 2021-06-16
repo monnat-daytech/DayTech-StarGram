@@ -6,15 +6,21 @@ import { MycommentService } from './mycomment.service';
 export class MycommentController {
     constructor(private myCommentService: MycommentService){}
 
-    @Get()
-    getMyComments(@Query('keyword') keyword: number){
-        return this.myCommentService.getMyComments(keyword)
+    // @Get()
+    // getMyComments(@Query('keyword') keyword: number){
+    //     return this.myCommentService.getMyComments(keyword)
+    // }
+
+    @Get('/:id')
+    getMyCommentById(@Param('id') id: number){
+        return this.myCommentService.getMyCommentById(id)
     }
 
-    // @Get('/:id')
-    // getMyCommentById(@Param('id') id: number){
-    //     return this.myCommentService.getMyCommentById(id)
-    // }
+    @Get('/:postId/:test')
+    getMyCommentByPostId(@Param('postId') postId: number)
+    {
+    return this.myCommentService.getMyCommentByPostId(postId);
+    }
 
     @Post()
     addMyComment(@Body() createMyCommentDto:CreateMyCommentDto){
@@ -26,9 +32,9 @@ export class MycommentController {
       return this.myCommentService.deleteMyCommentById(id);
     }
 
-    @Patch('/:id')
-     upDateMyCommentById(@Param('id') id: number,@Body() createMyCommentDto: CreateMyCommentDto,){
-        return  this.myCommentService.upDateMyCommentById(id , createMyCommentDto)
+    @Patch('/:id/test')
+     async upDateMyCommentById(@Param('id') id: number,@Body() createMyCommentDto: CreateMyCommentDto,){
+        return  await this.myCommentService.upDateMyCommentById(id , createMyCommentDto )
     }
 
 }

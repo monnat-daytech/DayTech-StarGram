@@ -17,6 +17,9 @@ export class MypostService {
 
     }
 
+    getMyPosts(){
+      return this.myPostRepository.find()
+    }
  
     async getMyPostById(id: number) {
         const data = await this.myPostRepository.findOne(id);
